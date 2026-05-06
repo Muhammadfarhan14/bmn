@@ -144,20 +144,104 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     padding:15px 25px;
 } */
 
-    .navbar-custom {
-        background: linear-gradient(90deg, #1e293b, #334155);
-        color: white;
-        padding: 15px 25px;
-        border-bottom: 3px solid #20c997;
-    }
+    .navbar-custom{
+    position: fixed;
+    top: 0;
+    left: 260px;
+    width: calc(100% - 260px);
+    z-index: 1000;
 
-    .navbar-custom {
-        position: fixed;
-        top: 0;
-        left: 260px;
-        width: calc(100% - 260px);
-        z-index: 1000;
-    }
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    backdrop-filter: blur(10px);
+
+    padding: 16px 28px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.navbar-left h5{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:white;
+}
+
+.navbar-left small{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.navbar-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    font-size:18px;
+
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.nav-icon:hover{
+    background:#3b82f6;
+    transform:translateY(-2px);
+}
+
+.profile-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background: rgba(255,255,255,0.06);
+    padding:8px 14px;
+    border-radius:14px;
+}
+
+.profile-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+    color:white;
+}
+
+.profile-info{
+    line-height:1.2;
+}
+
+.profile-info b{
+    color:white;
+    font-size:14px;
+}
+
+.profile-info small{
+    color:#94a3b8;
+    font-size:12px;
+}
 
     /* WRAPPER */
     .wrapper {
@@ -165,28 +249,6 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
         min-height: 100vh;
     }
 
-    /* SIDEBAR
-.sidebar{
-    width:230px;
-    background:#fff;
-    padding:20px;
-    border-right:1px solid #eee;
-}
-
-.sidebar a{
-    display:block;
-    padding:10px;
-    margin-bottom:8px;
-    border-radius:8px;
-    text-decoration:none;
-    color:#555;
-}
-
-.sidebar a:hover,
-.sidebar a.active{
-    background:#20c997;
-    color:white;
-} */
 
     .sidebar {
         width: 260px;
@@ -197,10 +259,14 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     }
 
     /* LOGO */
-    .sidebar .logo {
-        text-align: center;
-        margin-bottom: 25px;
-    }
+   .sidebar .logo{
+    text-align:center;
+    padding-bottom:25px;
+    margin-bottom:25px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.08);
+}
 
     .sidebar .logo img {
         width: 70px;
@@ -217,31 +283,54 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     }
 
     /* MENU */
-    .sidebar a {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        border-radius: 12px;
-        color: #e2e8f0;
-        text-decoration: none;
-        margin-bottom: 8px;
-        transition: 0.3s;
-    }
+    .sidebar a{
+    display:flex;
+    align-items:center;
+    gap:14px;
 
-    .sidebar a:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+    padding:14px 16px;
 
-    .sidebar a.active {
-        background: linear-gradient(90deg, #3b82f6, #2563eb);
-        color: white;
-    }
+    border-radius:16px;
+
+    color:#cbd5e1;
+    text-decoration:none;
+
+    margin-bottom:10px;
+
+    transition:0.3s;
+
+    font-weight:500;
+    position:relative;
+    overflow:hidden;
+}
+
+   .sidebar a:hover{
+    background:rgba(255,255,255,0.08);
+
+    transform:translateX(5px);
+
+    color:white;
+}
+
+   .sidebar a.active{
+
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,0.35);
+}
 
     /* ICON */
-    .sidebar i {
-        font-size: 18px;
-    }
+   .sidebar i{
+    font-size:20px;
+}
 
     /* FOOT BOX */
     .sidebar-footer {
@@ -257,19 +346,51 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
         margin-bottom: 10px;
     }
 
-    .sidebar {
-        width: 260px;
-        height: 100vh;
-        /* penting */
-        position: fixed;
-        /* biar full dan nempel */
-        top: 0;
-        left: 0;
-        background: linear-gradient(180deg, #0f172a, #1e3a8a);
-        color: white;
-        padding: 20px 15px;
-        overflow-y: auto;
-    }
+    .sidebar{
+    width:260px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    overflow-y:auto;
+
+    background:
+    linear-gradient(
+        180deg,
+        #0b1120 0%,
+        #172554 100%
+    );
+
+    padding:25px 18px;
+
+    border-right:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    10px 0 30px rgba(0,0,0,0.15);
+
+    z-index:999;
+}
+
+.sidebar::before{
+    content:'';
+
+    position:absolute;
+
+    top:-100px;
+    left:-100px;
+
+    width:220px;
+    height:220px;
+
+    background:#3b82f6;
+
+    opacity:0.15;
+
+    filter:blur(80px);
+
+    border-radius:50%;
+}
+
 
     .content {
         margin-left: 260px;
@@ -296,6 +417,140 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
         margin-bottom: 20px;
     }
 
+    /* =========================
+   MODERN TABLE CARD
+========================= */
+
+.modern-card{
+    background:#ffffff;
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    border:1px solid #eef2f7;
+    margin-bottom:25px;
+}
+
+/* HEADER */
+.modern-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modern-title{
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.modern-subtitle{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* TABLE */
+.table-modern{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+}
+
+.table-modern thead th{
+    background:#f8fafc;
+    color:#64748b;
+    font-size:13px;
+    text-transform:uppercase;
+    padding:16px;
+    border:none;
+    font-weight:700;
+}
+
+.table-modern tbody td{
+    padding:18px 16px;
+    border-bottom:1px solid #f1f5f9;
+    vertical-align:middle;
+}
+
+.table-modern tbody tr{
+    transition:0.3s;
+}
+
+.table-modern tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* BADGE */
+.badge-new{
+    background:#fef3c7;
+    color:#d97706;
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.badge-read{
+    background:#dcfce7;
+    color:#15803d;
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* BUTTON */
+.btn-modern-success{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:12px;
+    background:#16a34a;
+    color:white;
+    transition:0.3s;
+}
+
+.btn-modern-success:hover{
+    transform:translateY(-2px);
+    background:#15803d;
+}
+
+.btn-modern-danger{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:12px;
+    background:#ef4444;
+    color:white;
+    transition:0.3s;
+}
+
+.btn-modern-danger:hover{
+    transform:translateY(-2px);
+    background:#dc2626;
+}
+
+/* ICON BOX */
+.icon-circle{
+    width:55px;
+    height:55px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+}
+
+/* REQUEST BOX */
+.request-icon{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.note-icon{
+    background:#f3e8ff;
+    color:#9333ea;
+}
     /* BADGE */
     .badge-aktif {
         background: #d1fae5;
@@ -305,7 +560,7 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     }
 
     /* FOOTER */
-    .footer-custom {
+    /* .footer-custom {
         width: 100%;
         background: #334155;
         color: white;
@@ -322,7 +577,119 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+    } */
+
+        /* FOOTER MODERN */
+.footer-custom{
+    margin-left:260px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+
+    color:white;
+
+    padding:45px 40px 20px;
+
+    margin-top:40px;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+/* CONTAINER */
+.footer-inner{
+    width:100%;
+}
+
+/* CONTENT */
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:40px;
+
+    flex-wrap:wrap;
+}
+
+/* LEFT */
+.footer-left{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+
+    max-width:500px;
+}
+
+.footer-left img{
+    width:65px;
+}
+
+/* TEXT */
+.footer-title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.footer-desc{
+    color:#cbd5e1;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* RIGHT */
+.footer-right{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.footer-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:#e2e8f0;
+    font-size:15px;
+}
+
+.footer-item i{
+    color:#60a5fa;
+    font-size:18px;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    margin-top:35px;
+    padding-top:20px;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    text-align:center;
+
+    color:#94a3b8;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .footer-custom{
+        margin-left:0;
+        padding:30px 20px;
     }
+
+    .footer-content{
+        flex-direction:column;
+    }
+
+}
 
     .footer-left {
         display: flex;
@@ -609,66 +976,40 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 <body>
 
     <!-- NAVBAR -->
-    <div class="navbar-custom d-flex justify-content-between align-items-center flex-wrap">
+    <div class="navbar-custom">
 
-        <!-- KIRI (LOGO + NAMA SISTEM) -->
-        <!-- <div class="d-flex align-items-center gap-3">
-        <img src="logo.png" width="45">
-        <div>
-            <b style="font-size:18px;">SIMBAK</b><br>
-            <small style="font-size:12px; opacity:0.8;">
-                Sistem Inventaris Barang Masuk & Keluar
-            </small>
-        </div>
-    </div> -->
+    <!-- LEFT -->
+    <div class="navbar-left">
 
-        <!-- TENGAH (SAPAAN) -->
-        <div class="text-center d-none d-md-block">
-            <div style="font-size:14px;">Selamat Datang,</div>
-            <b style="font-size:18px;">
-                <?= $_SESSION['username']; ?> 👋
-            </b>
-        </div>
+        <small>Selamat Datang 👋</small>
 
-        <!-- KANAN (INFO + USER) -->
-        <div class="d-flex align-items-center gap-4">
+        <h5>
+            Admin
+        </h5>
 
-            <!-- TANGGAL -->
-            <!-- <div class="text-end d-none d-md-block">
-            <div style="font-size:13px;">
-                <i class="bi bi-calendar"></i>
-                <?= date('d M Y') ?>
-            </div>
-            <small style="font-size:12px;">
-                <?= date('H:i') ?> WIB
-            </small>
-        </div> -->
+    </div>
 
-            <!-- NOTIF -->
-            <!-- <div class="position-relative">
-            <i class="bi bi-bell fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
-                <?= $total ?>
-            </span>
-        </div> -->
+    <!-- RIGHT -->
+    <div class="navbar-right">
 
-            <!-- USER -->
-            <div class="d-flex align-items-center gap-2">
-                <i class="bi bi-person-circle fs-5"></i>
-                <div>
-                    <div style="font-size:13px;"><?= $_SESSION['username']; ?></div>
-                    <!-- <small style="font-size:11px; opacity:0.7;">Administrator</small> -->
-                </div>
+
+        <!-- PROFILE -->
+        <div class="profile-box">
+
+            <div class="profile-avatar">
+                <i class="bi bi-person-fill"></i>
             </div>
 
-            <!-- LOGOUT -->
-            <!-- <a href="../auth/logout.php" class="btn btn-danger btn-sm">
-            <i class="bi bi-box-arrow-right"></i>
-        </a> -->
+            <div class="profile-info">
+                <b><?= $_SESSION['username']; ?></b><br>
+                <!-- <small>Administrator</small> -->
+            </div>
 
         </div>
 
     </div>
+
+</div>
 
     <!-- WRAPPER -->
     <div class="wrapper">
@@ -684,21 +1025,25 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
             </div>
 
             <!-- MENU -->
-            <a href="dashboard.php" class="active">
-                <i class="bi bi-house-door"></i> Dashboard
-            </a>
+           <a href="dashboard.php" class="active">
+    <i class="bi bi-grid-1x2-fill"></i>
+    <span>Dashboard</span>
+</a>
 
-            <a href="rekap_barang.php">
-                <i class="bi bi-box"></i> Rekap Barang
-            </a>
+<a href="rekap_barang.php">
+    <i class="bi bi-box-seam-fill"></i>
+    <span>Rekap Barang</span>
+</a>
 
-            <a href="proses_tambah_user.php">
-                <i class="bi bi-gear"></i> Tambah User
-            </a>
+<a href="proses_tambah_user.php">
+    <i class="bi bi-people-fill"></i>
+    <span>Tambah User</span>
+</a>
 
-            <a href="../auth/logout.php" class="text-danger">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </a>
+<a href="../auth/logout.php" class="text-danger">
+    <i class="bi bi-box-arrow-right"></i>
+    <span>Logout</span>
+</a>
 
             <!-- FOOT SIDEBAR -->
             <!-- <div class="sidebar-footer mt-4">
@@ -737,7 +1082,7 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
                                 <?= $total_barang ?>
                             </h2>
                             <small class="text-muted">
-                                Keseluruhan barang
+                                Keseluruhan
                             </small>
                         </div>
 
@@ -961,37 +1306,13 @@ if($status == 'baru'){ ?>
 
         <!-- KANAN -->
         <div class="d-flex align-items-center gap-2 flex-wrap">
-
-            <!-- SEARCH -->
-            <!-- <div class="input-group" style="width:220px;">
-                <span class="input-group-text bg-white border-end-0">
-                    <i class="bi bi-search"></i>
-                </span>
-
-                <input 
-                    type="text" 
-                    id="search"
-                    class="form-control border-start-0"
-                    placeholder="Cari..."
-                >
-            </div> -->
-
-            <!-- KATEGORI -->
-            <select id="kategori" class="form-select" style="width:170px;">
-                <option value="">Kategori</option>
-                <option>ATK</option>
-                <option>Elektronik</option>
-                <option>Persediaan</option>
-                <option>Peralatan</option>
-            </select>
-
             <!-- TOMBOL -->
             <button 
                 class="btn btn-success px-4"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTambah"
             >
-                + Tambah
+                + Tambah Barang
             </button>
 
         </div>
@@ -1173,28 +1494,65 @@ if($status == 'baru'){ ?>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer-custom">
-        <div class="footer-inner">
-            <div class="footer-content">
+   <!-- FOOTER -->
+<footer class="footer-custom">
 
-                <div class="footer-left d-flex align-items-center gap-3">
-                    <img src="logo.png" width="60">
-                    <b>KANTOR IMIGRASI KELAS I TPI SAMARINDA</b>
-                </div>
+    <div class="footer-inner">
+
+        <div class="footer-content">
+
+            <!-- LEFT -->
+            <div class="footer-left">
+
+                <img src="polos.png">
 
                 <div>
-                    <p><i class="bi bi-geo-alt"></i> Samarinda</p>
-                    <p><i class="bi bi-telephone"></i> 0811-5565-000</p>
-                    <p><i class="bi bi-envelope"></i> kanim_samarinda@imigrasi.go.id</p>
+
+                    <div class="footer-title">
+                        SIMBAK
+                    </div>
+
+                    <div class="footer-desc">
+                        Sistem Inventaris Barang Masuk & Keluar
+                        Kantor Imigrasi Kelas I TPI Samarinda.
+                        Sistem ini membantu pengelolaan inventaris
+                        menjadi lebih cepat, modern, dan terintegrasi.
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="text-center mt-3">
-                © 2026 Muhammad Farhan
+            <!-- RIGHT -->
+            <div class="footer-right">
+
+                <div class="footer-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Samarinda, Kalimantan Timur
+                </div>
+
+                <div class="footer-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    0811-5565-000
+                </div>
+
+                <div class="footer-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    kanim_samarinda@imigrasi.go.id
+                </div>
+
             </div>
+
         </div>
-    </footer>
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            © 2026 SIMBAK Inventory System
+        </div>
+
+    </div>
+
+</footer>
 
 
 
@@ -1208,42 +1566,7 @@ if($status == 'baru'){ ?>
 
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
-<script>
-$(document).ready(function () {
-
-    $('#tableBarang').DataTable({
-
-        pageLength: 10,
-
-        dom:
-            '<"d-flex justify-content-between align-items-center flex-wrap mb-3"lfB>rtip',
-
-        // buttons: [
-        //     {
-        //         text: 'DISPATCH SELECTED',
-        //         className: 'btn-primary'
-        //     }
-        // ],
-
-        language: {
-
-            search: "",
-
-            searchPlaceholder: "Cari barang...",
-
-            lengthMenu: "Show _MENU_",
-
-            paginate: {
-                previous: "‹",
-                next: "›"
-            }
-
-        }
-
-    });
-
-});
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
     function editData(id, kode, nama, jumlah, kategori) {
@@ -1255,22 +1578,6 @@ $(document).ready(function () {
 
         new bootstrap.Modal(document.getElementById('modalEdit')).show();
     }
-    </script>
-
-    <script>
-    function filter() {
-        let key = document.getElementById("search").value.toLowerCase();
-        let kat = document.getElementById("kategori").value.toLowerCase();
-        let rows = document.querySelectorAll("#table-data tr");
-
-        rows.forEach(r => {
-            let text = r.innerText.toLowerCase();
-            let k = r.children[3].innerText.toLowerCase();
-            r.style.display = (text.includes(key) && (kat == "" || k.includes(kat))) ? "" : "none";
-        });
-    }
-    search.onkeyup = filter;
-    kategori.onchange = filter;
     </script>
 
     <script>
@@ -1310,7 +1617,19 @@ $(document).ready(function () {
     });
     </script>
 
+    <script>
 
+/* =========================
+   AUTO REFRESH DASHBOARD
+========================= */
+
+setInterval(function(){
+
+    location.reload();
+
+}, 10000); // 10 detik
+
+</script>
 
 </body>
 

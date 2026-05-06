@@ -1,4 +1,13 @@
 <?php
+session_set_cookie_params([
+    'lifetime' => 86400,
+    'path' => '/',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+// session_start();
 session_start();
 include '../config/koneksi.php';
 
@@ -54,12 +63,112 @@ if(isset($_POST['kirim_catatan'])){
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
     <style>
     body {
         background: #f5f6fa;
         overflow-x: hidden;
     }
+
+    .navbar-custom{
+    position: fixed;
+    top: 0;
+    left: 260px;
+    width: calc(100% - 260px);
+    z-index: 1000;
+
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    backdrop-filter: blur(10px);
+
+    padding: 16px 28px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.navbar-left h5{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:white;
+}
+
+.navbar-left small{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.navbar-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    font-size:18px;
+
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.nav-icon:hover{
+    background:#3b82f6;
+    transform:translateY(-2px);
+}
+
+.profile-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background: rgba(255,255,255,0.06);
+    padding:8px 14px;
+    border-radius:14px;
+}
+
+.profile-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+    color:white;
+}
+
+.profile-info{
+    line-height:1.2;
+}
+
+.profile-info b{
+    color:white;
+    font-size:14px;
+}
+
+.profile-info small{
+    color:#94a3b8;
+    font-size:12px;
+}
 
     .card-box {
         border-radius: 12px;
@@ -106,6 +215,23 @@ if(isset($_POST['kirim_catatan'])){
             overflow-x: auto;
         }
 
+        .dataTables_wrapper .row{
+    align-items:center;
+}
+.card-box{
+    border-radius:20px;
+}
+
+.btn-warning{
+    border:none;
+    font-weight:600;
+}
+
+.btn-warning:hover{
+    transform:translateY(-2px);
+    transition:0.2s;
+}
+
         table {
             min-width: 600px;
         }
@@ -131,10 +257,14 @@ if(isset($_POST['kirim_catatan'])){
     }
 
     /* LOGO */
-    .sidebar .logo {
-        text-align: center;
-        margin-bottom: 25px;
-    }
+   .sidebar .logo{
+    text-align:center;
+    padding-bottom:25px;
+    margin-bottom:25px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,0.08);
+}
 
     .sidebar .logo img {
         width: 70px;
@@ -151,31 +281,54 @@ if(isset($_POST['kirim_catatan'])){
     }
 
     /* MENU */
-    .sidebar a {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        border-radius: 12px;
-        color: #e2e8f0;
-        text-decoration: none;
-        margin-bottom: 8px;
-        transition: 0.3s;
-    }
+    .sidebar a{
+    display:flex;
+    align-items:center;
+    gap:14px;
 
-    .sidebar a:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
+    padding:14px 16px;
 
-    .sidebar a.active {
-        background: linear-gradient(90deg, #3b82f6, #2563eb);
-        color: white;
-    }
+    border-radius:16px;
+
+    color:#cbd5e1;
+    text-decoration:none;
+
+    margin-bottom:10px;
+
+    transition:0.3s;
+
+    font-weight:500;
+    position:relative;
+    overflow:hidden;
+}
+
+   .sidebar a:hover{
+    background:rgba(255,255,255,0.08);
+
+    transform:translateX(5px);
+
+    color:white;
+}
+
+   .sidebar a.active{
+
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 25px rgba(37,99,235,0.35);
+}
 
     /* ICON */
-    .sidebar i {
-        font-size: 18px;
-    }
+   .sidebar i{
+    font-size:20px;
+}
 
     /* FOOT BOX */
     .sidebar-footer {
@@ -191,20 +344,50 @@ if(isset($_POST['kirim_catatan'])){
         margin-bottom: 10px;
     }
 
-    .sidebar {
-        width: 260px;
-        height: 100vh;
-        /* penting */
-        position: fixed;
-        /* biar full dan nempel */
-        top: 0;
-        left: 0;
-        background: linear-gradient(180deg, #0f172a, #1e3a8a);
-        color: white;
-        padding: 20px 15px;
-        overflow-y: auto;
-    }
+    .sidebar{
+    width:260px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    overflow-y:auto;
 
+    background:
+    linear-gradient(
+        180deg,
+        #0b1120 0%,
+        #172554 100%
+    );
+
+    padding:25px 18px;
+
+    border-right:1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    10px 0 30px rgba(0,0,0,0.15);
+
+    z-index:999;
+}
+
+.sidebar::before{
+    content:'';
+
+    position:absolute;
+
+    top:-100px;
+    left:-100px;
+
+    width:220px;
+    height:220px;
+
+    background:#3b82f6;
+
+    opacity:0.15;
+
+    filter:blur(80px);
+
+    border-radius:50%;
+}    
     .content {
         margin-left: 260px;
         padding: 20px;
@@ -220,7 +403,7 @@ if(isset($_POST['kirim_catatan'])){
         padding: 0 15px;
     }
 
-    .navbar-custom {
+    /* .navbar-custom {
         background: linear-gradient(90deg, #1e293b, #334155);
         color: white;
         padding: 15px 25px;
@@ -233,7 +416,7 @@ if(isset($_POST['kirim_catatan'])){
         left: 260px;
         width: calc(100% - 260px);
         z-index: 1000;
-    }
+    } */
 
     .main {
         width: 100%;
@@ -245,24 +428,117 @@ if(isset($_POST['kirim_catatan'])){
         width: 100%;
     }
 
-    .footer-custom {
-        width: 100%;
-        background: #334155;
-        color: white;
-        padding: 30px 0;
+          /* FOOTER MODERN */
+.footer-custom{
+    margin-left:260px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1e293b,
+        #334155
+    );
+
+    color:white;
+
+    padding:45px 40px 20px;
+
+    margin-top:40px;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+/* CONTAINER */
+.footer-inner{
+    width:100%;
+}
+
+/* CONTENT */
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:40px;
+
+    flex-wrap:wrap;
+}
+
+/* LEFT */
+.footer-left{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+
+    max-width:500px;
+}
+
+.footer-left img{
+    width:65px;
+}
+
+/* TEXT */
+.footer-title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.footer-desc{
+    color:#cbd5e1;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* RIGHT */
+.footer-right{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.footer-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:#e2e8f0;
+    font-size:15px;
+}
+
+.footer-item i{
+    color:#60a5fa;
+    font-size:18px;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    margin-top:35px;
+    padding-top:20px;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+
+    text-align:center;
+
+    color:#94a3b8;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .footer-custom{
+        margin-left:0;
+        padding:30px 20px;
     }
 
-    .footer-inner {
-        max-width: 1200px;
-        margin: auto;
-        padding: 0 20px;
+    .footer-content{
+        flex-direction:column;
     }
 
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
+}
 
     .footer-left {
         display: flex;
@@ -317,71 +593,247 @@ if(isset($_POST['kirim_catatan'])){
             justify-content: center;
         }
     }
+
+    /* DATATABLE */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter{
+    margin-bottom:15px;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+    border-radius:10px;
+    border:1px solid #dbeafe;
+    padding:8px 12px;
+}
+
+.dataTables_wrapper .dataTables_length select{
+    border-radius:10px;
+    border:1px solid #dbeafe;
+    padding:5px 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    border-radius:10px !important;
+    margin:0 3px;
+}
+
+table.dataTable thead th{
+    background:#f8fafc;
+    color:#475569;
+    font-weight:600;
+}
+
+.table tbody tr:hover{
+    background:#f1f5f9;
+    transition:0.2s;
+}
+
+.table td,
+.table th{
+    vertical-align:middle;
+}
+
+/* DATATABLE HEADER */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter{
+    margin-bottom:20px;
+}
+
+/* SHOW DATA */
+.dataTables_length label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:500;
+    color:#475569;
+}
+
+/* SELECT */
+.dataTables_length select{
+    min-width:80px !important;
+    border-radius:12px !important;
+    border:1px solid #cbd5e1 !important;
+    padding:8px 35px 8px 12px !important;
+    background-color:white !important;
+}
+
+/* SEARCH */
+.dataTables_filter label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:500;
+}
+
+.dataTables_filter input{
+    width:220px !important;
+    border-radius:12px !important;
+    border:1px solid #cbd5e1 !important;
+    padding:10px 14px !important;
+}
+
+/* PAGINATION */
+.dataTables_paginate{
+    margin-top:20px !important;
+}
+
+.paginate_button{
+    border-radius:10px !important;
+    margin:0 4px !important;
+}
+
+/* INFO TEXT */
+.dataTables_info{
+    padding-top:18px !important;
+    color:#64748b;
+}
+
+/* TABLE */
+table.dataTable{
+    border-collapse:separate !important;
+    border-spacing:0;
+}
+
+/* ===== TOP DATATABLE ===== */
+.dataTables_wrapper .row:first-child{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+/* KIRI */
+.dataTables_length{
+    float:left;
+}
+
+/* KANAN */
+.dataTables_filter{
+    float:right;
+    text-align:right;
+}
+
+/* LABEL SEARCH */
+.dataTables_filter label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    justify-content:flex-end;
+    font-weight:500;
+}
+
+/* INPUT SEARCH */
+.dataTables_filter input{
+
+    width:240px !important;
+
+    border-radius:14px !important;
+
+    border:1px solid #dbeafe !important;
+
+    padding:10px 16px !important;
+
+    margin-left:10px !important;
+
+    transition:0.3s ease;
+
+    background:white !important;
+}
+
+/* SAAT DIKLIK */
+.dataTables_filter input:focus{
+
+    border:1px solid #3b82f6 !important;
+
+    box-shadow:
+    0 0 0 4px rgba(59,130,246,0.15) !important;
+
+    outline:none !important;
+}
+
+/* SELECT SHOW DATA */
+.dataTables_length select{
+
+    margin:0 10px !important;
+
+    border-radius:12px !important;
+
+    padding:8px 30px 8px 12px !important;
+
+    border:1px solid #dbeafe !important;
+
+    transition:0.3s;
+}
+
+.dataTables_length select:focus{
+
+    border:1px solid #3b82f6 !important;
+
+    box-shadow:
+    0 0 0 4px rgba(59,130,246,0.15) !important;
+
+    outline:none !important;
+}
+
+@media(max-width:768px){
+
+    .dataTables_wrapper .row:first-child{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .dataTables_filter{
+        width:100%;
+    }
+
+    .dataTables_filter label{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .dataTables_filter input{
+        width:100% !important;
+    }
+
+}
+
     </style>
 </head>
 
 <body>
     <!-- NAVBAR -->
-    <div class="navbar-custom d-flex justify-content-between align-items-center flex-wrap">
+    <div class="navbar-custom">
 
-        <!-- KIRI (LOGO + NAMA SISTEM) -->
-        <!-- <div class="d-flex align-items-center gap-3">
-        <img src="logo.png" width="45">
-        <div>
-            <b style="font-size:18px;">SIMBAK</b><br>
-            <small style="font-size:12px; opacity:0.8;">
-                Sistem Inventaris Barang Masuk & Keluar
-            </small>
-        </div>
-    </div> -->
+    <!-- LEFT -->
+    <div class="navbar-left">
 
-        <!-- TENGAH (SAPAAN) -->
-        <div class="text-center d-none d-md-block">
-            <div style="font-size:14px;">Selamat Datang,</div>
-            <b style="font-size:18px;">
-                <?= $_SESSION['username']; ?> 👋
-            </b>
-        </div>
+        <h5>Selamat Datang 👋</h5>
 
-        <!-- KANAN (INFO + USER) -->
-        <div class="d-flex align-items-center gap-4">
 
-            <!-- TANGGAL -->
-            <!-- <div class="text-end d-none d-md-block">
-            <div style="font-size:13px;">
-                <i class="bi bi-calendar"></i>
-                <?= date('d M Y') ?>
-            </div>
-            <small style="font-size:12px;">
-                <?= date('H:i') ?> WIB
-            </small>
-        </div> -->
+    </div>
 
-            <!-- NOTIF -->
-            <!-- <div class="position-relative">
-            <i class="bi bi-bell fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
-                <?= $total ?>
-            </span>
-        </div> -->
+    <!-- RIGHT -->
+    <div class="navbar-right">
 
-            <!-- USER -->
-            <div class="d-flex align-items-center gap-2">
-                <i class="bi bi-person-circle fs-5"></i>
-                <div>
-                    <div style="font-size:13px;"><?= $_SESSION['username']; ?></div>
-                    <!-- <small style="font-size:11px; opacity:0.7;">Administrator</small> -->
-                </div>
+
+        <!-- PROFILE -->
+        <div class="profile-box">
+
+            <div class="profile-avatar">
+                <i class="bi bi-person-fill"></i>
             </div>
 
-            <!-- LOGOUT -->
-            <!-- <a href="../auth/logout.php" class="btn btn-danger btn-sm">
-            <i class="bi bi-box-arrow-right"></i>
-        </a> -->
+            <div class="profile-info">
+                <b><?= $_SESSION['username']; ?></b><br>
+                <!-- <small>Administrator</small> -->
+            </div>
 
         </div>
 
     </div>
+
+</div>
 
     <!-- WRAPPER -->
     <div class="wrapper" style="min-height:100vh; display:flex;">
@@ -414,45 +866,36 @@ if(isset($_POST['kirim_catatan'])){
 
             <div class="main">
 
-                <!-- HEADER -->
-                <div class="card-box mb-3">
-                    <div class="row align-items-center gy-2">
-
-                        <div class="col-12 col-md-4">
-                            <h5 class="mb-0"><b>Daftar Barang</b></h5>
-                            <small class="text-muted">Sistem Inventaris Kantor Imigrasi</small>
-                        </div>
-
-                        <div class="col-12 col-md-8">
-                            <div class="d-flex flex-column flex-md-row gap-2 justify-content-md-end">
-
-                                <select id="kategori" class="form-select w-100">
-                                    <option value="">Kategori</option>
-                                    <option>Elektronik</option>
-                                    <option>ATK</option>
-                                    <option>Persediaan</option>
-                                    <option>Peralatan</option>
-                                </select>
-
-                                <div class="input-group w-100">
-                                    <span class="input-group-text">🔍</span>
-                                    <input type="text" id="search" class="form-control" placeholder="Cari barang...">
-                                </div>
-
-                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalCatatan">
-                                    📝 Catatan
-                                </button>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
                 <!-- TABLE -->
-                <div class="card-box">
+                <div class="card-box shadow-sm border-0">
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+    <!-- KIRI -->
+    <div>
+        <h4 class="fw-bold mb-1">
+            Daftar Barang
+        </h4>
+
+        <small class="text-muted">
+            Sistem Inventaris Kantor Imigrasi
+        </small>
+    </div>
+
+    <!-- KANAN -->
+    <button 
+        class="btn btn-warning px-4 shadow-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#modalCatatan"
+    >
+
+        <i class="bi bi-pencil-square"></i>
+        Catatan
+
+    </button>
+
+</div>
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
+                        <table id="tableBarang" class="table table-hover align-middle">
                             <thead>
                                 <tr>
                                     <th>Nama Barang</th>
@@ -578,33 +1021,102 @@ while($d = mysqli_fetch_assoc($data)){
             </div>
         </div>
     </div>
+
+ <!-- FOOTER -->
 <footer class="footer-custom">
-        <div class="container-custom">
-            <div class="footer-content">
 
-                <!-- KIRI -->
-                <div class="footer-left">
-                    <img src="logo.png">
-                    <div>
-                        <b>KANTOR IMIGRASI KELAS I TPI SAMARINDA</b>
+    <div class="footer-inner">
+
+        <div class="footer-content">
+
+            <!-- LEFT -->
+            <div class="footer-left">
+
+                <img src="polos.png">
+
+                <div>
+
+                    <div class="footer-title">
+                        SIMBAK
                     </div>
-                </div>
 
-                <!-- KANAN -->
-                <div class="footer-right">
-                    <p><i class="bi bi-geo-alt"></i> Jl. Ir. H. Juanda No.45, Samarinda</p>
-                    <p><i class="bi bi-telephone"></i> 0811-5565-000</p>
-                    <p><i class="bi bi-envelope"></i> kanim_samarinda@imigrasi.go.id</p>
+                    <div class="footer-desc">
+                        Sistem Inventaris Barang Masuk & Keluar
+                        Kantor Imigrasi Kelas I TPI Samarinda.
+                        Sistem ini membantu pengelolaan inventaris
+                        menjadi lebih cepat, modern, dan terintegrasi.
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="footer-bottom">
-                © 2026 Dibuat Oleh Muhammad Farhan
+            <!-- RIGHT -->
+            <div class="footer-right">
+
+                <div class="footer-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Samarinda, Kalimantan Timur
+                </div>
+
+                <div class="footer-item">
+                    <i class="bi bi-telephone-fill"></i>
+                    0811-5565-000
+                </div>
+
+                <div class="footer-item">
+                    <i class="bi bi-envelope-fill"></i>
+                    kanim_samarinda@imigrasi.go.id
+                </div>
+
             </div>
+
         </div>
-    </footer>
-   
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            © 2026 SIMBAK Inventory System
+        </div>
+
+    </div>
+
+</footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+    $('#tableBarang').DataTable({
+
+        responsive:true,
+
+        pageLength:50,
+
+        lengthMenu:[
+            [10,25,50,100],
+            [10,25,50,100]
+        ],
+
+        language:{
+            search:"Cari:",
+            lengthMenu:"Tampilkan _MENU_ data",
+            zeroRecords:"Data tidak ditemukan",
+            info:"Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            paginate:{
+                previous:"←",
+                next:"→"
+            }
+        }
+
+    });
+
+});
+</script>
 
     <script>
     document.getElementById("kategori").addEventListener("change", function() {
