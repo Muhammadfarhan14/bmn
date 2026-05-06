@@ -5,23 +5,29 @@ include '../config/koneksi.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$data = mysqli_query($conn,"SELECT * FROM users WHERE username='$username' AND password='$password'");
-$cek = mysqli_num_rows($data);
+$query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
+$user = mysqli_fetch_assoc($query);
 
-if($cek > 0){
-    $user = mysqli_fetch_assoc($data);
+if($user){
 
-    $_SESSION['id'] = $user['id'];
-    $_SESSION['username'] = $user['username'];
-    $_SESSION['role'] = $user['role'];
+    if($password == $user['password']){
 
-    // 🔥 ROLE CHECK
-    if($user['role'] == 'admin'){
-        header("Location: ../admin/dashboard.php");
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['ruangan'] = $user['ruangan'];
+
+        if($user['role'] == 'admin'){
+            header("Location: ../admin/dashboard.php");
+        } else {
+            header("Location: ../user/dashboard.php");
+        }
+        exit;
+
     } else {
-        header("Location: ../user/dashboard.php");
+        echo "<script>alert('Password salah');window.location='login.php';</script>";
     }
 
-}else{
-    echo "<script>alert('Login gagal'); window.location='login.php';</script>";
+} else {
+    echo "<script>alert('User tidak ditemukan');window.location='login.php';</script>";
 }
