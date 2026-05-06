@@ -78,12 +78,20 @@ if(isset($_POST['simpan'])){
 
 /* UPDATE */
 if(isset($_POST['update'])){
-    mysqli_query($conn,"UPDATE barang SET
+
+    mysqli_query($conn,"
+    UPDATE barang SET
+
         kode_barang='$_POST[kode_barang]',
         nama_barang='$_POST[nama]',
+        kategori='$_POST[kategori]',
         jumlah='$_POST[jumlah]',
-        status='".($_POST['jumlah']>0?'Tersedia':'Habis')."'
-        WHERE id='$_POST[id]'
+
+        status='".($_POST['jumlah'] > 0 
+            ? 'Tersedia' 
+            : 'Habis')."'
+
+    WHERE id='$_POST[id]'
     ");
 
     header("Location: dashboard.php");
@@ -970,6 +978,37 @@ href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     background:#f8fafc;
 }
 
+.modal-content{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.modal-header{
+    border-bottom:none;
+    padding:20px 25px;
+}
+
+.modal-body{
+    padding:25px;
+}
+
+.modal-footer{
+    border-top:none;
+    padding:20px 25px;
+}
+
+.modal .form-control,
+.modal .form-select{
+    height:50px;
+    border-radius:14px;
+}
+
+.modal .btn-success{
+    border-radius:12px;
+    padding:10px 25px;
+}
+
     </style>
 </head>
 
@@ -1477,7 +1516,7 @@ if($status == 'baru'){ ?>
                         <input type="number" name="jumlah" id="edit_jumlah" class="form-control mb-2"
                             placeholder="Jumlah">
 
-                        <select name="kategori" id="edit_kategori" class="form-control">
+                        <select name="kategori" id="edit_kategori" class="form-select">
                             <option>ATK</option>
                             <option>Elektronik</option>
                             <option>Persediaan</option>
@@ -1623,11 +1662,11 @@ if($status == 'baru'){ ?>
    AUTO REFRESH DASHBOARD
 ========================= */
 
-setInterval(function(){
+// setInterval(function(){
 
-    location.reload();
+//     location.reload();
 
-}, 10000); // 10 detik
+// }, 10000); // 10 detik
 
 </script>
 
