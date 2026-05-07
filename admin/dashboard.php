@@ -1363,6 +1363,7 @@ if($status == 'baru'){ ?>
 
         <thead>
             <tr>
+                <th style="display:none;">ID</th>
                 <th>Kode</th>
                 <th>Status</th>
                 <th>Nama</th>
@@ -1381,6 +1382,10 @@ if($status == 'baru'){ ?>
             ?>
 
             <tr>
+
+            <td style="display:none;">
+        <?= $d['id']; ?>
+    </td>
 
                 <!-- KODE -->
                 <td>
@@ -1631,27 +1636,37 @@ if($status == 'baru'){ ?>
     <script>
     $(document).ready(function() {
 
-        $('#tableBarang').DataTable({
+       $('#tableBarang').DataTable({
 
-            pageLength: 50,
+    pageLength: 50,
 
-            lengthMenu: [
-                [10, 25, 50, 100, -1],
-                [10, 25, 50, 100, "Semua"]
-            ],
+    order: [[0, 'desc']], // URUTKAN BERDASARKAN ID TERBARU
 
-            language: {
-                search: "Cari:",
-                lengthMenu: "Tampilkan _MENU_ data",
-                info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-                paginate: {
-                    previous: "Prev",
-                    next: "Next"
-                },
-                zeroRecords: "Data tidak ditemukan"
-            }
+    columnDefs: [
+        {
+            targets: 0,
+            visible: false,
+            searchable: false
+        }
+    ],
 
-        });
+    lengthMenu: [
+        [10, 25, 50, 100, -1],
+        [10, 25, 50, 100, "Semua"]
+    ],
+
+    language: {
+        search: "Cari:",
+        lengthMenu: "Tampilkan _MENU_ data",
+        info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+        paginate: {
+            previous: "Prev",
+            next: "Next"
+        },
+        zeroRecords: "Data tidak ditemukan"
+    }
+
+});
 
     });
     </script>
