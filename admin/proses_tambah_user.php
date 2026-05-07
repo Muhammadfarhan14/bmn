@@ -654,7 +654,7 @@ body{
     </div>
 
     <!-- MENU -->
-            <a href="dashboard.php" class="active">
+            <a href="dashboard.php">
     <i class="bi bi-grid-1x2-fill"></i>
     <span>Dashboard</span>
 </a>
@@ -664,7 +664,7 @@ body{
     <span>Rekap Barang</span>
 </a>
 
-<a href="proses_tambah_user.php">
+<a href="proses_tambah_user.php" class="active">
     <i class="bi bi-people-fill"></i>
     <span>Tambah User</span>
 </a>

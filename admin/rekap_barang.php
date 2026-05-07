@@ -570,12 +570,12 @@ $total_semua = 0;
             </div>
 
             <!-- MENU -->
-                    <a href="dashboard.php" class="active">
+                    <a href="dashboard.php">
     <i class="bi bi-grid-1x2-fill"></i>
     <span>Dashboard</span>
 </a>
 
-<a href="rekap_barang.php">
+<a href="rekap_barang.php" class="active">
     <i class="bi bi-box-seam-fill"></i>
     <span>Rekap Barang</span>
 </a>
